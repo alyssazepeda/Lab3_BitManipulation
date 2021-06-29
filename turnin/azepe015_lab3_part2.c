@@ -28,7 +28,6 @@ int main(void) {
 	DDRC = 0XFF; PORTC = 0X00; //Config port C's 8 pins to output
 	unsigned char fuelLevel = 0x00;
 	unsigned char LED = 0x00;
-	unsigned char sensor = 0x00;
     /* Insert your solution below */
     while (1) {
 	fuelLevel = PINA & 0x0F; //only read PA3-PA0
@@ -52,12 +51,6 @@ int main(void) {
 	}
 	else {
 		LED = 0x3F; //PC5-0
-	}
-	
-	//Check if seatbelt sensor is lit
-	sensor = PINA & 0x70; 	  //check PA6-PA4
-	if(sensor == 0x30) { 	  //PA4&5 are lit but not 6
-		LED = LED | 0x80; //set PC7 = 1
 	}
 	PORTC = LED;	
     }
